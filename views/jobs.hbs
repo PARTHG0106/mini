@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find Jobs for Skilled Women</title>
+    <link rel="stylesheet" href="/css/jobs.css">
+</head>
+<body>
+
+    <header>
+    <nav>
+        <div class="menu-icon" id="menuIcon">
+            &#9776; <!-- Hamburger Icon -->
+        </div>
+        <ul class="menu-list" id="menuList">
+            <li><a href="/views/dashboard.hbs">Home</a></li>
+            <li><a href="/views/about.hbs">About</a></li>
+            <li><a href="/views/contact.hbs">Contact</a></li>
+            <li><a href="/auth/logout" class="logout">Logout</a></li>
+        </ul>
+        <div class="header-content">
+            <h1>Find Jobs for Skilled Women</h1>
+            <p>Connecting talented women with opportunities to shine!</p>
+        </div>
+    </nav>
+</header>
+
+
+
+    <div class="filter-section">
+        <h2>Filter Jobs</h2>
+        <label for="skill">Skill:</label>
+        <select id="skill" onchange="filterJobs()">
+            <option value="all">All Skills</option>
+            <option value="cleaning">Cleaning</option>
+            <option value="cooking">Cooking</option>
+            <option value="gardening">Gardening</option>
+            <option value="babysitting">Babysitting</option>
+        </select>
+
+        <label for="location">Location:</label>
+        <input type="text" id="location" placeholder="Enter location" onkeyup="filterJobs()">
+    </div>
+
+    <div class="job-list">
+        <h2>Available Jobs</h2>
+        <ul id="job-list">
+            <!-- Jobs will be dynamically loaded here -->
+        </ul>
+    </div>
+    
+    <script src="/js/jobs.js"></script>
+</body>
+</html>

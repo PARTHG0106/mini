@@ -1,0 +1,201 @@
+/* Basic Styles */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    overflow-x: hidden;
+}
+
+/* Navbar Styles */
+/* General Header Styling */
+header {
+    background-color: #333;
+    color: white;
+    padding: 20px;
+}
+
+/* Use Flexbox for the nav to position elements */
+nav {
+    display: flex;
+    justify-content: flex-start; /* Align items from the left */
+    align-items: center;
+    position: relative;
+}
+
+/* Styling for the hamburger icon */
+.menu-icon {
+    font-size: 30px;
+    cursor: pointer;
+    color: white;
+    margin-left: 15px; /* Add a bit of left margin for aesthetics */
+    display: block;
+    transition: color 0.3s ease; /* Transition for smooth color change */
+}
+
+/* Change color to yellow on hover */
+.menu-icon:hover {
+    color: yellow;
+}
+
+/* Hide the menu by default */
+.menu-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: none; /* Hide the menu initially */
+    flex-direction: column;
+    background-color: #333;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    right: 0;
+    text-align: left;
+    transition: opacity 0.3s ease; /* Transition for menu appearance */
+    opacity: 0; /* Initially hide */
+}
+
+/* Show the menu when it becomes active */
+.menu-list.active {
+    display: block;
+    opacity: 1; /* Smooth transition when menu is shown */
+}
+
+/* Transition effect for menu items */
+.menu-list li {
+    margin: 10px 0;
+}
+
+.menu-list a {
+    color: white;
+    text-decoration: none;
+    padding: 10px;
+    transition: color 0.3s ease; /* Smooth hover effect for links */
+}
+
+.menu-list a:hover {
+    color: yellow; /* Change link color to yellow on hover */
+}
+
+.logout {
+    color: red;
+    transition: color 0.3s ease; /* Transition effect for logout hover */
+}
+
+.logout:hover {
+    color: yellow; /* Change logout color to yellow on hover */
+}
+
+/* Header Content Styling */
+.header-content {
+    margin-top: 20px;
+    text-align: center;
+    flex: 1; /* Pushes the header content to the center */
+}
+
+h1 {
+    margin: 0;
+    font-size: 24px;
+}
+
+p {
+    margin-top: 10px;
+    font-size: 16px;
+}
+
+.navbar ul {
+    display: flex;
+    justify-content: center; 
+    list-style-type: none;
+}
+
+.navbar ul li {
+    margin: 0 15px;
+}
+
+.navbar ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    transition: color 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.navbar ul li a:hover {
+    color: #FFD700;
+    transform: scale(1.1);
+}
+/* Home Section */
+.home {
+    height: 100vh;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://source.unsplash.com/featured/?office,work') no-repeat center center/cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+    padding-top: 60px;
+}
+
+.home .content h1 {
+    font-size: 50px;
+    margin-bottom: 20px;
+    opacity: 0;
+    animation: fadeIn 1s forwards;
+}
+
+.home .content p {
+    font-size: 24px;
+    margin-bottom: 30px;
+    opacity: 0;
+    animation: fadeIn 1.5s forwards;
+}
+
+.btn-get-started {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #FFD700;
+    color: black;
+    text-decoration: none;
+    border-radius: 30px;
+    font-size: 20px;
+    font-weight: bold;
+    opacity: 0;
+    animation: fadeIn 2s forwards;
+    transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.btn-get-started:hover {
+    background-color: #ff8c00;
+    transform: scale(1.1);
+}
+
+/* Animations */
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+/* Responsive for smaller screens */
+@media (max-width: 768px) {
+    .navbar ul {
+        flex-direction: column;
+    }
+
+    .home .content h1 {
+        font-size: 36px;
+    }
+
+    .home .content p {
+        font-size: 18px;
+    }
+
+    .btn-get-started {
+        font-size: 18px;
+    }
+}

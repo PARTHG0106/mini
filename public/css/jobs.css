@@ -1,0 +1,165 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #333;
+}
+
+/* General Header Styling */
+header {
+    background-color: #333;
+    color: white;
+    padding: 20px;
+}
+
+/* Use Flexbox for the nav to position elements */
+nav {
+    display: flex;
+    justify-content: flex-start; /* Align items from the left */
+    align-items: center;
+    position: relative;
+}
+
+/* Styling for the hamburger icon */
+.menu-icon {
+    font-size: 30px;
+    cursor: pointer;
+    color: white;
+    margin-left: 15px; /* Add a bit of left margin for aesthetics */
+    display: block;
+    transition: color 0.3s ease; /* Transition for smooth color change */
+}
+
+/* Change color to yellow on hover */
+.menu-icon:hover {
+    color: yellow;
+}
+
+/* Hide the menu by default */
+.menu-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: none; /* Hide the menu initially */
+    flex-direction: column;
+    background-color: #333;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    right: 0;
+    text-align: left;
+    transition: opacity 0.3s ease; /* Transition for menu appearance */
+    opacity: 0; /* Initially hide */
+}
+
+/* Show the menu when it becomes active */
+.menu-list.active {
+    display: block;
+    opacity: 1; /* Smooth transition when menu is shown */
+}
+
+/* Transition effect for menu items */
+.menu-list li {
+    margin: 10px 0;
+}
+
+.menu-list a {
+    color: white;
+    text-decoration: none;
+    padding: 10px;
+    transition: color 0.3s ease; /* Smooth hover effect for links */
+}
+
+.menu-list a:hover {
+    color: yellow; /* Change link color to yellow on hover */
+}
+
+.logout {
+    color: red;
+    transition: color 0.3s ease; /* Transition effect for logout hover */
+}
+
+.logout:hover {
+    color: yellow; /* Change logout color to yellow on hover */
+}
+
+/* Header Content Styling */
+.header-content {
+    margin-top: 20px;
+    text-align: center;
+    flex: 1; /* Pushes the header content to the center */
+}
+
+h1 {
+    margin: 0;
+    font-size: 24px;
+}
+
+p {
+    margin-top: 10px;
+    font-size: 16px;
+}
+
+
+.filter-section {
+    margin: 20px;
+    text-align: center;
+}
+
+.filter-section h2 {
+    margin-bottom: 10px;
+}
+
+.filter-section select,
+.filter-section input {
+    padding: 10px;
+    margin: 10px;
+    width: 200px;
+}
+
+.job-list {
+    margin: 20px;
+}
+
+.job-list h2 {
+    text-align: center;
+}
+
+.job-list ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.job-list li {
+    background-color: #e7f3e7;
+    padding: 15px;
+    margin: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+footer {
+    text-align: center;
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 0;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
+li a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    transition: color 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+li a:hover {
+    color: #FFD700;
+    transform: scale(1.1);
+}
