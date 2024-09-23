@@ -3,7 +3,7 @@ const mysql = require('mysql');
 const db = mysql.createConnection({
     host: 'sql303.infinityfree.com',
     user: 'if0_37369387',
-    password: 'Parthg@123',  // Set your MySQL password here
+    password: 'BxSTD05kZoo5u',  // Set your MySQL password here
     database: 'if0_37369387_empowerher'
 });
 
