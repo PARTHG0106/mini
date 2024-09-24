@@ -1,10 +1,10 @@
 const mysql = require('mysql');
 
 const db = mysql.createConnection({
-    host: 'sql303.infinityfree.com',
-    user: 'if0_37369387',
-    password: 'BxSTD05kZoo5u',  // Set your MySQL password here
-    database: 'if0_37369387_empowerher'
+    host: 'sql12.freesqldatabase.com',
+    user: 'sql12733084',
+    password: '6RqEpGmVWg',  // Set your MySQL password here
+    database: 'sql12733084'
 });
 
 db.connect((err) => {
