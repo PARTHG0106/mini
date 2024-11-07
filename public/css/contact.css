@@ -68,15 +68,16 @@ nav {
     margin: 10px 0;
 }
 
-.menu-list a {
+.menu-list li a {
     color: white;
-    text-decoration: none;
+    text-decoration: none ; /* Ensure no underline */
     padding: 10px;
     transition: color 0.3s ease; /* Smooth hover effect for links */
 }
 
-.menu-list a:hover {
+.menu-list li a:hover {
     color: yellow; /* Change link color to yellow on hover */
+    text-decoration: none; /* Ensure no underline on hover */
 }
 
 .logout {
