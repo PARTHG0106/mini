@@ -1,23 +1,42 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const hbs = require('hbs');
-const authRoutes = require('./routes/auth');  // Authentication routes
+const authRoute = require('./routes/auth');  // Authentication routes
 const path = require('path');
 // const email = require('emailjs');
 const session = require('express-session');
 const app = express();
+const cookieParser = require('cookie-parser');
+require("dotenv").config();
+const cors = require("cors");
+const passport = require("passport");
+const cookieSession = require("cookie-session");
+const passportStrategy = require("./passport");
+app.use(cookieParser());
 
 // Middleware
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-// Set up session management
+// Set up session middleware
 app.use(session({
-    secret: 'your-secret-key', // Use a strong, unique secret key
+    secret: 'your-secret-key', // Use a strong secret key
     resave: false,
-    saveUninitialized: false,
-    cookie: { secure: false } // Set to true if using HTTPS
+    saveUninitialized: true,
+    cookie: {
+        maxAge: 24 * 60 * 60 * 1000 // 1 day (optional)
+    }
 }));
+
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(
+	cors({
+		origin: "http://localhost:3000",
+		methods: "GET,POST,PUT,DELETE",
+		credentials: true,
+	})
+);
 
 // Set up Handlebars as the view engine
 app.set('view engine', 'hbs');
@@ -27,7 +46,7 @@ const publicDirectory = path.join(__dirname ,'./public');
 app.use(express.static(publicDirectory));
 
 // Use the auth routes
-app.use('/auth', authRoutes);
+app.use('/auth', authRoute);
 
 // Home route to render an HBS template
 app.get('/', (req, res) => {
@@ -35,12 +54,14 @@ app.get('/', (req, res) => {
 });
 
 // Logout route
-app.get('/logout', (req, res) => {
+// Logout route in app.js
+app.get('/auth/logout', (req, res) => {
     req.session.destroy((err) => {
         if (err) {
             return res.status(500).send('Could not log out.');
         }
-        res.redirect('/'); // Redirect to login page after logout
+        res.clearCookie('jwt'); // Clear the JWT cookie
+        res.redirect('/'); // Redirect to home page after logout
     });
 });
 
@@ -54,8 +75,13 @@ app.get('/views/dashboard.hbs', (req, res) => {
     res.render('dashboard', { title: 'dashboard' });
 })
 app.get('/views/contact.hbs', (req, res) => {
-    res.render('contact',{ title: 'contact' });
+    res.render('contact',{ title: 'contact', user: req.user });
 });
+app.get('/contact', (req, res) => {
+    console.log(req.user); // Check if user data is available
+    res.render('contact', { user: req.user }); // Pass the logged-in user's details
+});
+
 
 // Server
 const PORT = process.env.PORT || 3000;
