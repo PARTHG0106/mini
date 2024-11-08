@@ -3,7 +3,7 @@ const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const db = require('./models/db'); // Ensure this path is correct
 
 passport.serializeUser((user, done) => {
-    done(null, user.id);
+    done(null, user.id); // Storing only the user ID in session
 });
 
 passport.deserializeUser((id, done) => {
@@ -11,12 +11,10 @@ passport.deserializeUser((id, done) => {
         if (err) {
             return done(err);
         }
-        // Check if user exists
         if (result.length > 0) {
-            return done(null, result[0]);
+            return done(null, result[0]); // This ensures the full user data is available (username, profilePic)
         } else {
-            // User doesn't exist in the database anymore
-            return done(null, false); // Pass false to indicate no user found
+            return done(null, false);
         }
     });
 });
@@ -29,6 +27,7 @@ passport.use(new GoogleStrategy({
     const email = profile.emails[0].value;
     const googleId = profile.id;
     let username = profile.displayName; // Default username from Google
+    const profilePic = profile.photos ? profile.photos[0].value : '/images/default-profile.png'; // Get profile picture or default if not available
 
     // Check if the user already exists in the database
     const checkUserQuery = 'SELECT * FROM users WHERE email = ?';
@@ -39,7 +38,7 @@ passport.use(new GoogleStrategy({
 
         if (result.length > 0) {
             // User already exists, continue with login
-            return done(null, result[0]);
+            return done(null, result[0]); // Make sure the result has username and profilePic fields
         } else {
             // Check if the username already exists
             const checkUsernameQuery = 'SELECT * FROM users WHERE username = ?';
@@ -53,26 +52,28 @@ passport.use(new GoogleStrategy({
                     username += googleId.substring(0, 5); // Append first 5 characters of Google ID
                 }
 
-                // Insert new user with unique username
+                // Insert new user with unique username and profile picture
                 const newUser = {
                     username: username,
                     email: email,
                     google_id: googleId,
-                    provider: 'google'
+                    provider: 'google',
+                    profilePic: profilePic // Store the profile picture URL
                 };
 
-                const insertUserQuery = 'INSERT INTO users (username, email, google_id, provider) VALUES (?, ?, ?, ?)';
-                db.query(insertUserQuery, [newUser.username, newUser.email, newUser.google_id, newUser.provider], (err, insertResult) => {
+                const insertUserQuery = 'INSERT INTO users (username, email, google_id, provider, profilePic) VALUES (?, ?, ?, ?, ?)';
+                db.query(insertUserQuery, [newUser.username, newUser.email, newUser.google_id, newUser.provider, newUser.profilePic], (err, insertResult) => {
                     if (err) {
                         return done(err);
                     }
 
                     newUser.id = insertResult.insertId;
-                    return done(null, newUser);
+                    return done(null, newUser); // Ensure that newUser is passed here
                 });
             });
         }
     });
 }));
+
 
 module.exports = passport;
