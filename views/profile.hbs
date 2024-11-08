@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <link rel="stylesheet" href="/css/profile.css">
+</head>
+
+<body>
+    <header>
+        <nav>
+            {{!-- <div class="menu-icon" id="menuIcon">
+                &#9776; <!-- Hamburger Icon -->
+            </div> --}}
+            <ul class="menu-list" id="menuList">
+                <li><a href="/views/dashboard.hbs">Home</a></li>
+                <li><a href="/views/about.hbs">About</a></li>
+                <li><a href="/views/jobs.hbs">Jobs</a></li>
+                <li><a href="/views/contact.hbs">Contact</a></li>
+                <li><a href="/auth/logout" class="logout">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="profile-section">
+        <!-- Profile Card -->
+        <div class="profile-card">
+            <div class="profile-img">
+                {{#if user.profilePic}}
+                <img src="{{user.profilePic}}" alt="Profile Picture">
+                {{else}}
+                <img src="/images/default-profile.png" alt="Default Profile Picture">
+                {{/if}}
+            </div>
+            <h2>{{user.username}}</h2>
+            <p>{{user.email}}</p>
+            <span class="last-login">Last login: {{user.lastLogin}}</span>
+            <button class="save-button gradient-button">Save</button>
+        </div>
+
+        <!-- Work History Card -->
+        <div class="work-history-card card">
+            <div class="card-header">
+                <h3>Work History</h3>
+                <button id="edit-work-history" class="edit-button">Edit</button>
+            </div>
+            <ul id="work-history-list">
+                {{#each user.workHistory}}
+                <li>{{this}}</li>
+                {{else}}
+                <li>No work history available.</li>
+                {{/each}}
+            </ul>
+        </div>
+
+        <!-- Skills Card -->
+        <div class="skills-card card">
+            <div class="card-header">
+                <h3>Skills</h3>
+                <button id="edit-skills" class="edit-button">Edit</button>
+            </div>
+            <ul id="skills-list">
+                {{#each user.skills}}
+                <li>{{this}}</li>
+                {{else}}
+                <li>No skills listed.</li>
+                {{/each}}
+            </ul>
+        </div>
+    </section>
+
+    <script src="/js/profile.js"></script>
+</body>
+
+</html>
